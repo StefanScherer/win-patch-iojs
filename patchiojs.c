@@ -6,6 +6,10 @@
 
 int __cdecl main(int argc, char **argv)
 {
+  FILE *f;
+  long fsize;
+  char *string;
+  char *match;
 
   // Validate the parameters
   if (argc != 2) {
@@ -16,18 +20,18 @@ int __cdecl main(int argc, char **argv)
     return 1;
   }
 
-  FILE *f = fopen(argv[1], "rb");
+  f = fopen(argv[1], "rb");
   fseek(f, 0, SEEK_END);
-  long fsize = ftell(f);
+  fsize = ftell(f);
   fseek(f, 0, SEEK_SET);
 
-  char *string = malloc(fsize + 1);
+  string = malloc(fsize + 1);
   fread(string, fsize, 1, f);
   fclose(f);
 
   string[fsize] = 0;
 
-  char *match = strstr(string, "dnsopts.hints = dns.ADDRCONFIG;");
+  match = strstr(string, "dnsopts.hints = dns.ADDRCONFIG;");
   if (match) {
     strncpy(match, "dnsopts.hints = 0;//", 20);
   }
