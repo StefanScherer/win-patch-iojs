@@ -1,0 +1,14 @@
+version: 1.0.{build}
+configuration: Release
+platform: x64
+build:
+  project: patchiojs.sln
+  verbosity: minimal
+test: off
+artifacts:
+- path: x64/Release/patchiojs.exe
+  name: Release
+deploy:
+- provider: GitHub
+  auth_token:
+    secure: FA0xahKGq6AVJEOd1Oen0xPbbM3C9qETfDj69A93xeVyLDlQazwyJa1Si6fn8OMo
